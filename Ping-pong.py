@@ -38,13 +38,17 @@ class GameSprite(pg.sprite.Sprite):
             self.rect.y -= self.speed
         if a[pg.K_DOWN] and self.rect.y <= (HEIGHT - 100):
             self.rect.y += self.speed
-    
+    def fr(self):
+        self.speed_x *= -1
+    def sd(self,r):
+        return self.rect.colliderect(r)
 
 
 
 ball = GameSprite('tenis_ball.png',200,200,50,50,4,4,4)
 player1 = GameSprite('racket.png',0,150,40,100,6,4,4)
 player2 = GameSprite('racket.png',560,150,40,100,6,4,4)
+
 
 clock = pg.time.Clock()
 
@@ -63,5 +67,7 @@ while game:
     ball.update()
     player1.pf()
     player2.pd()
+    if ball.sd(player1) or ball.sd(player2):
+        ball.fr()
     pg.display.update()
     clock.tick(FPS)
