@@ -60,8 +60,6 @@ ball = GameSprite('tenis_ball.png',x1,y1,50,50,4,4,4)
 player1 = GameSprite('racket.png',x2,y2,40,100,6,4,4)
 player2 = GameSprite('racket.png',x3,y3,40,100,6,4,4)
 
-f = pg.font.SysFont('Arial',True,40)
-score = f.render('Score:' + str(s_p1),True,(0,0,0))
 
 clock = pg.time.Clock()
 
@@ -82,7 +80,6 @@ while game:
         player2.pd()
         if ball.sds():
             ball.remake()
-        window.blit(score,(100,100))
         if ball.sd(player1) or ball.sd(player2):
             ball.fr()
     pg.display.update()
