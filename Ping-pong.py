@@ -50,8 +50,14 @@ class GameSprite(pg.sprite.Sprite):
     def sd(self,r):
         return self.rect.colliderect(r)
     def remake(self):
+        if self.rect.x >= 500:
+            window.blit(lose2, (200, 200))
+        else:
+            window.blit(lose1, (200, 200))
+        
         self.rect.x = 200
         self.rect.y = 200
+        
 x1,y1 = 200,200
 x2,y2 = 0,150
 x3,y3 = 560,150
@@ -60,6 +66,10 @@ ball = GameSprite('tenis_ball.png',x1,y1,50,50,4,4,4)
 player1 = GameSprite('racket.png',x2,y2,40,100,6,4,4)
 player2 = GameSprite('racket.png',x3,y3,40,100,6,4,4)
 
+
+fon = pg.font.Font(None, 35)
+lose1 = fon.render('PLAYER 1 LOSE!', True, (180, 0, 0))
+lose2 = fon.render('PLAYER 2 LOSE!', True, (180, 0, 0))
 
 clock = pg.time.Clock()
 
@@ -80,6 +90,11 @@ while game:
         player2.pd()
         if ball.sds():
             ball.remake()
+            
+            
+            
+            
+            finish = True
         if ball.sd(player1) or ball.sd(player2):
             ball.fr()
     pg.display.update()
